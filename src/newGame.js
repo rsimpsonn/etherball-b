@@ -179,11 +179,7 @@ function success(p) {
   }
 }
 
-function newGame(db, playerAddress1, playerAddress2) {
-  const result = getData(db, playerAddress1, playerAddress2, function(data) {
-    const player1TokenIds = data[0];
-    const player2TokenIds = data[1];
-  });
+function newGame(db, player1Team, player2Team) {
   const player1Team = [
     {
       name: "Ryan",
@@ -196,7 +192,7 @@ function newGame(db, playerAddress1, playerAddress2) {
       games: 0
     },
     {
-      name: "Hello",
+      name: "Jackie",
       shot: 58,
       strength: 75,
       pass: 75,
@@ -206,7 +202,7 @@ function newGame(db, playerAddress1, playerAddress2) {
       games: 0
     },
     {
-      name: "Hey",
+      name: "Tim",
       shot: 46,
       strength: 75,
       pass: 75,
@@ -216,7 +212,7 @@ function newGame(db, playerAddress1, playerAddress2) {
       games: 0
     },
     {
-      name: "Wazzup",
+      name: "Swish",
       shot: 52,
       strength: 75,
       pass: 75,
@@ -226,7 +222,7 @@ function newGame(db, playerAddress1, playerAddress2) {
       games: 0
     },
     {
-      name: "Hey man",
+      name: "Venus",
       shot: 60,
       strength: 75,
       pass: 75,
@@ -238,7 +234,7 @@ function newGame(db, playerAddress1, playerAddress2) {
   ];
   const player2Team = [
     {
-      name: "Tim",
+      name: "Saturn",
       shot: 60,
       strength: 75,
       pass: 75,
@@ -248,7 +244,7 @@ function newGame(db, playerAddress1, playerAddress2) {
       games: 0
     },
     {
-      name: "Jesus",
+      name: "Table",
       shot: 73,
       strength: 75,
       pass: 75,
@@ -258,7 +254,7 @@ function newGame(db, playerAddress1, playerAddress2) {
       games: 0
     },
     {
-      name: "Jackie",
+      name: "Lebron",
       shot: 40,
       strength: 75,
       pass: 75,
@@ -278,7 +274,7 @@ function newGame(db, playerAddress1, playerAddress2) {
       games: 0
     },
     {
-      name: "Wallazoo",
+      name: "Vincent",
       shot: 49,
       strength: 75,
       pass: 75,
@@ -449,7 +445,13 @@ function newGame(db, playerAddress1, playerAddress2) {
     [6, 7, 8, 9, 10]
   );
 
-  return { messages, player1TeamStats, player2TeamStats };
+  return {
+    messages,
+    player1TeamStats,
+    player2TeamStats,
+    player1Team,
+    player2Team
+  };
 }
 
 module.exports = newGame;

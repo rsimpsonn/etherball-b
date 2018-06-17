@@ -1,5 +1,7 @@
 const MongoClient = require("mongodb").MongoClient;
 const newGame = require("./newGame");
+const getLineup = require("./getLineup");
+const postLineup = require("./postLineup");
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -12,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
   // Request methods you wish to allow
   res.setHeader(
@@ -40,13 +42,28 @@ app.get("/", (req, res) => {
   return res.send("Connected to server.");
 });
 
+app.post("/getlineup", (req, res) => {
+  getLineup(db, req.body.playerAddress, function(data) {
+    res.end(JSON.stringify(data));
+  });
+});
+
+app.post("/postlineup", (req, res) => {
+  postLineup(
+    db,
+    req.body.playerAddress,
+    req.body.pg,
+    req.body.sg,
+    req.body.sf,
+    req.body.pf,
+    req.body.c
+  );
+  res.end("Worked!");
+});
+
 app.post("/game", (req, res) => {
   console.log(req.body.playerAddress1);
-  res.end(
-    JSON.stringify(
-      newGame(db, req.body.playerAddress1, req.body.playerAddress2)
-    )
-  );
+  res.end(JSON.stringify(newGame(db, req.body.team1, req.body.team2)));
 });
 
 MongoClient.connect(
